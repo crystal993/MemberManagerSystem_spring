@@ -91,6 +91,15 @@ public class MemberController {
 		return "main";
 	}
 	
+	
+	@RequestMapping("/member/myInfo")
+	public String myInfo(Model model,  HttpSession session) {	
+		Member dto = (Member)session.getAttribute("dto");
+		model.addAttribute(dto);
+		return "member/myInfo";
+	}
+	
+	
 	@RequestMapping("/admin/multipleCondition")
 	public String multipleCondition(String condition, String keyword, Model model) {
 		List<Member> list = null;
