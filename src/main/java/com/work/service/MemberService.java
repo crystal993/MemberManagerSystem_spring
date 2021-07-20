@@ -62,6 +62,16 @@ public class MemberService {
 	public List<Member> memberListByConditionToList(String condition, List<String> memberIdList) {
 		return memberDao.selectMemberListByConditionToList(condition, memberIdList);
 	}
+
+	/** 회원정보 변경 */
+	public int memberUpdate(Member dto, String memberId) {
+		return memberDao.memberUpdate(dto, memberId);
+	}
+
+	/**내 정보 조회*/
+	public Member myInfo(String memberId) {
+		return memberDao.myInfo(memberId);
+	}
 	
 }
 

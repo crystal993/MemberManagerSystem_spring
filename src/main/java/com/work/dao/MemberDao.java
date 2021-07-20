@@ -28,6 +28,13 @@ public interface MemberDao {
 
 	/** 다중조건 조회 : 다중 아이디 조회: ArrayList */
 	public List<Member> selectMemberListByConditionToList(String condition, List<String> memberIdList);
+
+	/**내 정보 조회*/
+	public Member myInfo(String memberId);
+	
+	/** 회원정보 변경 */
+	public int memberUpdate(Member dto, String memberId);
+
 	
 
 }

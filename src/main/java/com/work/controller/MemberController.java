@@ -93,8 +93,9 @@ public class MemberController {
 	
 	
 	@RequestMapping("/member/myInfo")
-	public String myInfo(Model model,  HttpSession session) {	
-		Member dto = (Member)session.getAttribute("dto");
+	public String myInfo(HttpSession session, Model model) {
+		String memberId = (String)session.getAttribute("memberId");
+		Member dto = memberService.myInfo(memberId);
 		model.addAttribute(dto);
 		return "member/myInfo";
 	}
@@ -122,4 +123,27 @@ public class MemberController {
 		model.addAttribute("list", list);
 		return "admin/memberList";
 	}
+	
+	@RequestMapping("/member/memberUpdate")
+	public String memberUpdate(HttpSession session, Member dto, Model model) {	
+		session.setAttribute("dto", dto);
+		String memberId = (String)session.getAttribute("memberId");
+		int result = memberService.memberUpdate(dto, memberId);
+
+		
+		
+		if (result == 1) {
+			if (dto.getGrade() != null && dto != null) {
+				model.addAttribute("memberId", memberId); 
+				model.addAttribute("grade", dto.getGrade()); 
+				model.addAttribute("dto", dto);
+				}
+			model.addAttribute("message", "[성공] 내 정보 변경");
+			return "main";
+		} else {
+			model.addAttribute("message", "[실패] 내 정보 변경");
+			return "main";
+		}
+	}
+	
 }

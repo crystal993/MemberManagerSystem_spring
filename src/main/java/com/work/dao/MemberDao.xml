@@ -71,6 +71,18 @@
 		</where>
 	</if>
   </select>
+  
+  <!-- 	public Member myInfo(String memberId); -->
+  <select id="myInfo" resultType="Member" parameterType="Member">
+  	select * from member where member_Id = #{memberId}
+  </select>
+  
+  
+  <!-- public int memberUpdate(Member dto, String memberId); -->
+  <update id="memberUpdate" parameterType="map">
+  	UPDATE Member SET member_pw = #{dto.memberPw}, name = #{dto.name}, mobile = #{dto.mobile}, email = #{dto.email} where member_Id = #{memberId}
+  </update>
+  
 </mapper>
 
 
